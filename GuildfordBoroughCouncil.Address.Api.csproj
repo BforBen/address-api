@@ -45,7 +45,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetCoords, Version=1.0.0.12, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetCoords, Version=1.0.0.14, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\DotNetCoords.dll</HintPath>
     </Reference>
@@ -57,10 +57,12 @@
       <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GuildfordBoroughCouncil.Address">
+    <Reference Include="GuildfordBoroughCouncil.Address, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\GuildfordBoroughCouncil.Address.1.0.0\lib\net45\GuildfordBoroughCouncil.Address.dll</HintPath>
     </Reference>
-    <Reference Include="GuildfordBoroughCouncil.Linq">
+    <Reference Include="GuildfordBoroughCouncil.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\GuildfordBoroughCouncil.Linq.1.0.0\lib\net45\GuildfordBoroughCouncil.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />

@@ -1,0 +1,26 @@
+@using System.Web.Http
+@using System.Web.Http.Controllers
+@using System.Web.Http.Description
+@using System.Collections.ObjectModel
+@using GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models
+@model Collection<ApiDescription>
+
+@{
+    ViewBag.Title = "Help";
+
+    // Group APIs by controller
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+}
+
+<section class="featured">
+    <div class="content-wrapper">
+        <h2>Introduction</h2>
+        <p>This service provides access to the LLPG and OS AddressBase national data via <a href="http://www.aligned-assets.co.uk/" rel="nofollow">Aligned Asset's</a> SinglePoint.</p>
+    </div>
+</section>
+<section class="content-wrapper main-content clear-fix">
+    @foreach (var group in apiGroups)
+    {
+        @Html.DisplayFor(m => group, "ApiGroup")
+    }
+</section>

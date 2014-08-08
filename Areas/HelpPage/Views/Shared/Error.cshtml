@@ -1,0 +1,46 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    //Layout = "_Layout.cshtml";
+    ViewBag.Title = "Application error";
+    ViewContext.ViewData["ShowBreadcrumb"] = false;
+
+    bool Http401 = false;
+
+    WebException we = null;
+
+    if (Model != null && Model.Exception != null)
+    {
+        we = Model.Exception as WebException;
+    }
+            
+    if (we != null)
+    {
+        if (we.Status.Equals(WebExceptionStatus.ProtocolError))
+        {
+            Http401 = ((HttpWebResponse)we.Response).StatusCode.Equals(HttpStatusCode.Unauthorized);
+        }
+    }
+
+    string ErrorHelpUrl = (string)ViewContext.ViewData["ErrorHelpUrl"] ?? "http://loop.guildford.gov.uk/BS/Pages/LogaServiceDeskCall.aspx";
+    string ErrorHelpName = (string)ViewContext.ViewData["ErrorHelpName"] ?? "ICT Service Desk";
+    string ErrorHelpTel = (string)ViewContext.ViewData["ErrorHelpTel"] ?? "x4906";
+}
+@if (Http401 && ErrorHelpTel == "x4906")
+{
+    <p>Please check that you have <strong>Integrated Windows Authentication</strong> enabled in your Internet Explorer settings.</p>
+
+    <ol>
+        <li>Click <strong>Tools</strong></li>
+        <li>Click <strong>Internet Options</strong></li>
+        <li>Choose the <strong>Advanced</strong> tab</li>
+        <li>Scroll down the windows until you see the <strong>Security</strong> section which is almost at the bottom</li>
+        <li>Ensure that there is a tick next to <strong>Enabled Integrated Windows Authentication</strong> and then click <strong>OK</strong></li>
+        <li>You must now log off and back on again or restart your computer for this setting change to take effect.</li>
+    </ol>
+    <p>If this still doesn't fix the problem please contact the ICT Service Desk on x4906.</p>
+}
+else
+{
+    <p class="lead">Sorry, something has gone wrong.</p>
+    <p>Please try again in a few minutes or alternatively, please contact <a href="@ErrorHelpUrl">@ErrorHelpName</a> on @ErrorHelpTel.</p>
+}

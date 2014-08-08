@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BluelightModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GIS_AddressBase.dbo.AUTHORITY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AUTHORITY">
+          <Key>
+            <PropertyRef Name="AUTHORITY_REF" />
+            <PropertyRef Name="AUTHORITY_NAME" />
+            <PropertyRef Name="MINUSRN" />
+            <PropertyRef Name="MAXUSRN" />
+          </Key>
+          <Property Name="AUTHORITY_REF" Type="int" Nullable="false" />
+          <Property Name="AUTHORITY_NAME" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MINUSRN" Type="int" Nullable="false" />
+          <Property Name="MAXUSRN" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BLPU">
+          <Key>
+            <PropertyRef Name="MAPINFO_ID" />
+          </Key>
+          <Property Name="UPRN" Type="float" Nullable="false" />
+          <Property Name="BLPU_VER" Type="smallint" />
+          <Property Name="BLPU_CUR" Type="bit" Nullable="false" />
+          <Property Name="ENTRY_DATE" Type="int" Nullable="false" />
+          <Property Name="LAST_UPDATE_DATE" Type="int" Nullable="false" />
+          <Property Name="START_DATE" Type="int" Nullable="false" />
+          <Property Name="END_DATE" Type="int" />
+          <Property Name="EASTING" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="NORTHING" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="RPA" Type="tinyint" Nullable="false" />
+          <Property Name="LOCAL_CUSTODIAN" Type="int" Nullable="false" />
+          <Property Name="LOGICAL_STATUS" Type="tinyint" Nullable="false" />
+          <Property Name="ORGANISATION_MATCH_STATUS" Type="varchar" MaxLength="4" />
+          <Property Name="PARTIAL_MATCH_STATUS" Type="varchar" MaxLength="1" />
+          <Property Name="MAPINFO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRO_ORDER" Type="int" />
+          <Property Name="CHANGE_TYPE" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ISPARENT" Type="bit" Nullable="false" />
+          <Property Name="ISCHILD" Type="bit" Nullable="false" />
+          <Property Name="IE_NO" Type="smallint" Nullable="false" />
+          <Property Name="NEVERCHILD" Type="bit" />
+          <Property Name="NEVEREXPORT" Type="bit" Nullable="false" />
+          <Property Name="UPDATED" Type="bit" />
+          <Property Name="BLPU_STATE" Type="smallint" />
+          <Property Name="BLPU_STATE_DATE" Type="int" />
+          <Property Name="BLPU_CLASS" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="PARENT_UPRN" Type="float" />
+          <Property Name="ORGANISATION" Type="varchar" MaxLength="100" />
+          <Property Name="WARD_CODE" Type="varchar" MaxLength="10" />
+          <Property Name="PARISH_CODE" Type="varchar" MaxLength="10" />
+          <Property Name="CUSTODIAN_ONE" Type="smallint" />
+          <Property Name="CUSTODIAN_TWO" Type="smallint" />
+          <Property Name="CAN_KEY" Type="varchar" MaxLength="14" />
+          <Property Name="LAST_UPDATED" Type="datetime" Nullable="false" />
+          <Property Name="CROSS_REF_DETAILS" Type="varchar" MaxLength="4" />
+          <Property Name="USAGE" Type="varchar" MaxLength="160" />
+          <Property Name="ACCESS_POINT" Type="tinyint" Nullable="false" />
+          <Property Name="FRC_STATUS" Type="tinyint" />
+          <Property Name="FRS_ID" Type="int" />
+          <Property Name="RESPONSIBLE_FRS_ID" Type="int" />
+          <Property Name="POSTAL_ADDRESS" Type="varchar" MaxLength="1" />
+          <Property Name="POSTCODE_LOCATOR" Type="varchar" MaxLength="8" />
+          <Property Name="MULTI_OCC_COUNT" Type="smallint" />
+        </EntityType>
+        <Function Name="DAL_GetAbbreviations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SearchPropertyWithOptions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchToken" Type="varchar" Mode="In" />
+          <Parameter Name="SearchOptions" Type="varchar" Mode="In" />
+          <Parameter Name="iRowsReturned" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BluelightModelStoreContainer">
+          <EntitySet Name="BLPU" EntityType="Self.BLPU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AUTHORITY" EntityType="Self.AUTHORITY" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AUTHORITY].[AUTHORITY_REF] AS [AUTHORITY_REF], 
+    [AUTHORITY].[AUTHORITY_NAME] AS [AUTHORITY_NAME], 
+    [AUTHORITY].[MINUSRN] AS [MINUSRN], 
+    [AUTHORITY].[MAXUSRN] AS [MAXUSRN]
+    FROM [dbo].[AUTHORITY] AS [AUTHORITY]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BluelightModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BLPU">
+          <Key>
+            <PropertyRef Name="MAPINFO_ID" />
+          </Key>
+          <Property Name="UPRN" Type="Double" Nullable="false" />
+          <Property Name="BLPU_VER" Type="Int16" />
+          <Property Name="BLPU_CUR" Type="Boolean" Nullable="false" />
+          <Property Name="ENTRY_DATE" Type="Int32" Nullable="false" />
+          <Property Name="LAST_UPDATE_DATE" Type="Int32" Nullable="false" />
+          <Property Name="START_DATE" Type="Int32" Nullable="false" />
+          <Property Name="END_DATE" Type="Int32" />
+          <Property Name="EASTING" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="NORTHING" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="RPA" Type="Byte" Nullable="false" />
+          <Property Name="LOCAL_CUSTODIAN" Type="Int32" Nullable="false" />
+          <Property Name="LOGICAL_STATUS" Type="Byte" Nullable="false" />
+          <Property Name="ORGANISATION_MATCH_STATUS" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PARTIAL_MATCH_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="MAPINFO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRO_ORDER" Type="Int32" />
+          <Property Name="CHANGE_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ISPARENT" Type="Boolean" Nullable="false" />
+          <Property Name="ISCHILD" Type="Boolean" Nullable="false" />
+          <Property Name="IE_NO" Type="Int16" Nullable="false" />
+          <Property Name="NEVERCHILD" Type="Boolean" />
+          <Property Name="NEVEREXPORT" Type="Boolean" Nullable="false" />
+          <Property Name="UPDATED" Type="Boolean" />
+          <Property Name="BLPU_STATE" Type="Int16" />
+          <Property Name="BLPU_STATE_DATE" Type="Int32" />
+          <Property Name="BLPU_CLASS" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PARENT_UPRN" Type="Double" />
+          <Property Name="ORGANISATION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WARD_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PARISH_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CUSTODIAN_ONE" Type="Int16" />
+          <Property Name="CUSTODIAN_TWO" Type="Int16" />
+          <Property Name="CAN_KEY" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_UPDATED" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CROSS_REF_DETAILS" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="USAGE" Type="String" MaxLength="160" FixedLength="false" Unicode="false" />
+          <Property Name="ACCESS_POINT" Type="Byte" Nullable="false" />
+          <Property Name="FRC_STATUS" Type="Byte" />
+          <Property Name="FRS_ID" Type="Int32" />
+          <Property Name="RESPONSIBLE_FRS_ID" Type="Int32" />
+          <Property Name="POSTAL_ADDRESS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="POSTCODE_LOCATOR" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="MULTI_OCC_COUNT" Type="Int16" />
+        </EntityType>
+        <EntityType Name="AUTHORITY">
+          <Key>
+            <PropertyRef Name="AUTHORITY_REF" />
+            <PropertyRef Name="AUTHORITY_NAME" />
+            <PropertyRef Name="MINUSRN" />
+            <PropertyRef Name="MAXUSRN" />
+          </Key>
+          <Property Name="AUTHORITY_REF" Type="Int32" Nullable="false" />
+          <Property Name="AUTHORITY_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MINUSRN" Type="Int32" Nullable="false" />
+          <Property Name="MAXUSRN" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="BluelightEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BLPUs" EntityType="Self.BLPU" />
+          <EntitySet Name="AUTHORITies" EntityType="Self.AUTHORITY" />
+          <FunctionImport Name="DAL_GetAbbreviations" ReturnType="Collection(BluelightModel.DAL_GetAbbreviations_Result)" />
+          <FunctionImport Name="SearchPropertyWithOptions">
+            <Parameter Name="SearchToken" Mode="In" Type="String" />
+            <Parameter Name="SearchOptions" Mode="In" Type="String" />
+            <Parameter Name="iRowsReturned" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="DAL_GetAbbreviations_Result">
+          <Property Type="Int32" Name="pk_id" Nullable="false" />
+          <Property Type="String" Name="abbreviation" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="full_text" Nullable="false" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BluelightModelStoreContainer" CdmEntityContainer="BluelightEntities">
+          <EntitySetMapping Name="BLPUs">
+            <EntityTypeMapping TypeName="BluelightModel.BLPU">
+              <MappingFragment StoreEntitySet="BLPU">
+                <ScalarProperty Name="UPRN" ColumnName="UPRN" />
+                <ScalarProperty Name="BLPU_VER" ColumnName="BLPU_VER" />
+                <ScalarProperty Name="BLPU_CUR" ColumnName="BLPU_CUR" />
+                <ScalarProperty Name="ENTRY_DATE" ColumnName="ENTRY_DATE" />
+                <ScalarProperty Name="LAST_UPDATE_DATE" ColumnName="LAST_UPDATE_DATE" />
+                <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
+                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
+                <ScalarProperty Name="EASTING" ColumnName="EASTING" />
+                <ScalarProperty Name="NORTHING" ColumnName="NORTHING" />
+                <ScalarProperty Name="RPA" ColumnName="RPA" />
+                <ScalarProperty Name="LOCAL_CUSTODIAN" ColumnName="LOCAL_CUSTODIAN" />
+                <ScalarProperty Name="LOGICAL_STATUS" ColumnName="LOGICAL_STATUS" />
+                <ScalarProperty Name="ORGANISATION_MATCH_STATUS" ColumnName="ORGANISATION_MATCH_STATUS" />
+                <ScalarProperty Name="PARTIAL_MATCH_STATUS" ColumnName="PARTIAL_MATCH_STATUS" />
+                <ScalarProperty Name="MAPINFO_ID" ColumnName="MAPINFO_ID" />
+                <ScalarProperty Name="PRO_ORDER" ColumnName="PRO_ORDER" />
+                <ScalarProperty Name="CHANGE_TYPE" ColumnName="CHANGE_TYPE" />
+                <ScalarProperty Name="ISPARENT" ColumnName="ISPARENT" />
+                <ScalarProperty Name="ISCHILD" ColumnName="ISCHILD" />
+                <ScalarProperty Name="IE_NO" ColumnName="IE_NO" />
+                <ScalarProperty Name="NEVERCHILD" ColumnName="NEVERCHILD" />
+                <ScalarProperty Name="NEVEREXPORT" ColumnName="NEVEREXPORT" />
+                <ScalarProperty Name="UPDATED" ColumnName="UPDATED" />
+                <ScalarProperty Name="BLPU_STATE" ColumnName="BLPU_STATE" />
+                <ScalarProperty Name="BLPU_STATE_DATE" ColumnName="BLPU_STATE_DATE" />
+                <ScalarProperty Name="BLPU_CLASS" ColumnName="BLPU_CLASS" />
+                <ScalarProperty Name="PARENT_UPRN" ColumnName="PARENT_UPRN" />
+                <ScalarProperty Name="ORGANISATION" ColumnName="ORGANISATION" />
+                <ScalarProperty Name="WARD_CODE" ColumnName="WARD_CODE" />
+                <ScalarProperty Name="PARISH_CODE" ColumnName="PARISH_CODE" />
+                <ScalarProperty Name="CUSTODIAN_ONE" ColumnName="CUSTODIAN_ONE" />
+                <ScalarProperty Name="CUSTODIAN_TWO" ColumnName="CUSTODIAN_TWO" />
+                <ScalarProperty Name="CAN_KEY" ColumnName="CAN_KEY" />
+                <ScalarProperty Name="LAST_UPDATED" ColumnName="LAST_UPDATED" />
+                <ScalarProperty Name="CROSS_REF_DETAILS" ColumnName="CROSS_REF_DETAILS" />
+                <ScalarProperty Name="USAGE" ColumnName="USAGE" />
+                <ScalarProperty Name="ACCESS_POINT" ColumnName="ACCESS_POINT" />
+                <ScalarProperty Name="FRC_STATUS" ColumnName="FRC_STATUS" />
+                <ScalarProperty Name="FRS_ID" ColumnName="FRS_ID" />
+                <ScalarProperty Name="RESPONSIBLE_FRS_ID" ColumnName="RESPONSIBLE_FRS_ID" />
+                <ScalarProperty Name="POSTAL_ADDRESS" ColumnName="POSTAL_ADDRESS" />
+                <ScalarProperty Name="POSTCODE_LOCATOR" ColumnName="POSTCODE_LOCATOR" />
+                <ScalarProperty Name="MULTI_OCC_COUNT" ColumnName="MULTI_OCC_COUNT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AUTHORITies">
+            <EntityTypeMapping TypeName="BluelightModel.AUTHORITY">
+              <MappingFragment StoreEntitySet="AUTHORITY">
+                <ScalarProperty Name="AUTHORITY_REF" ColumnName="AUTHORITY_REF" />
+                <ScalarProperty Name="AUTHORITY_NAME" ColumnName="AUTHORITY_NAME" />
+                <ScalarProperty Name="MINUSRN" ColumnName="MINUSRN" />
+                <ScalarProperty Name="MAXUSRN" ColumnName="MAXUSRN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DAL_GetAbbreviations" FunctionName="BluelightModel.Store.DAL_GetAbbreviations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BluelightModel.DAL_GetAbbreviations_Result">
+                <ScalarProperty Name="pk_id" ColumnName="pk_id" />
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+                <ScalarProperty Name="full_text" ColumnName="full_text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchPropertyWithOptions" FunctionName="BluelightModel.Store.SearchPropertyWithOptions" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,12 @@
+@using System.Web.Http
+@using GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models
+@model HelpPageApiModel
+
+@{
+    var description = Model.ApiDescription;
+    ViewBag.Title = description.HttpMethod.Method + " " + description.RelativePath;
+}
+
+<section class="content-wrapper main-content clear-fix">
+    @Html.DisplayForModel()
+</section>

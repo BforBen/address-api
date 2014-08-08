@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService">
+      <s:element name="SpatialBoundarySearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Boundary" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SpatialBoundarySearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SpatialBoundarySearchResult" type="tns:SearchResultData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SearchResultData">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:SearchResults" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ServiceResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="tns:ServiceError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ServiceError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SearchResults">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfSearchResultItem" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FullResultsCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="tns:SearchToken" />
+          <s:element minOccurs="0" maxOccurs="1" name="BluelightDataSet">
+            <s:complexType>
+              <s:sequence>
+                <s:element ref="s:schema" />
+                <s:any />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSearchResultItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SearchResultItem" nillable="true" type="tns:SearchResultItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SearchResultItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FullAddress" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ManagementSystemUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TrackerValue" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldItems" type="tns:ArrayOfFieldInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormattedAddressElements" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Coordinates" type="tns:BNGCoordinates" />
+          <s:element minOccurs="0" maxOccurs="1" name="TextToDisplay" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFieldInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FieldInfo" nillable="true" type="tns:FieldInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FieldInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="dataType" type="tns:FieldDataType" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsIndex" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSearchField" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsReturnField" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsResultListField" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAddressField" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressClass" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Expression" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Group" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sequence" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValueIsBlank" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaultValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataValuesList" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AutoCompleteType" type="tns:FieldAutoCompleteType" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValuesAreInWebConfig" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="FieldDataType">
+        <s:restriction base="s:string">
+          <s:enumeration value="String" />
+          <s:enumeration value="Number" />
+          <s:enumeration value="Bool" />
+          <s:enumeration value="MultiSelectList" />
+          <s:enumeration value="AutoCompleteString" />
+          <s:enumeration value="Label" />
+          <s:enumeration value="Hidden" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="FieldAutoCompleteType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Postcodes" />
+          <s:enumeration value="Streets" />
+          <s:enumeration value="Units" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BNGCoordinates">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Easting" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Northing" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SearchToken" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsWebServiceSearch" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalResultsFound" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSpatialSearch" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PagedResults" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageItemCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageIndex" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageLookAheadCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderByFieldTags" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnFieldTags" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnAllFields" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinItemRowNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxItemRowNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommandTimeout" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAdddressBaseData" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReturnQasNameRawAddress" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TextSearchToken" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SearchToken">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="SearchMode" type="tns:SearchMode" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="SearchMode">
+        <s:restriction base="s:string">
+          <s:enumeration value="DrillDown" />
+          <s:enumeration value="AllFound" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="QueryToken">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:TextSearchToken">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SearchText" type="tns:AnonymousSearchText" />
+              <s:element minOccurs="0" maxOccurs="1" name="QualifiedValues" type="tns:ArrayOfSearchField" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AnonymousSearchText">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:TextSearchOptions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TextSearchOptions">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MatchPartialValues" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PhoneticSearch" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSearchField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SearchField" nillable="true" type="tns:SearchField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SearchField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Field" type="tns:FieldInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:TextSearchOptions" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SpatialRadialSearchByEastingNorthing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Easting" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Northing" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Distance" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SpatialRadialSearchByEastingNorthingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SpatialRadialSearchByEastingNorthingResult" type="tns:SearchResultData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SimpleSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SimpleSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SimpleSearchResult" type="tns:SearchResultData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AdvancedSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AdvancedSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdvancedSearchResult" type="tns:SearchResultData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AdvancedCustomSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="tns:QueryToken" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AdvancedCustomSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdvancedCustomSearchResult" type="tns:SearchResultData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Search">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="tns:QueryToken" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchResult" type="tns:SearchResultData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdapters">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAdaptersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAdaptersResult" type="tns:AdapterCollection" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AdapterCollection">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Adapters" type="tns:ArrayOfAdapterInfo" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfAdapterInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AdapterInfo" nillable="true" type="tns:AdapterInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AdapterInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Key" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Nlpg" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tag" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchFieldsSupported">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchFieldsSupportedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchFieldsSupportedResult" type="tns:FeatureSupported" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FeatureSupported">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResult">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetSearchFields">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSearchFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSearchFieldsResult" type="tns:FieldInfoCollection" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FieldInfoCollection">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfFieldInfo" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ResultFieldsSupported">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResultFieldsSupportedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResultFieldsSupportedResult" type="tns:FeatureSupported" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResultFields">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResultFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResultFieldsResult" type="tns:FieldInfoCollection" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReturnFields">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReturnFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReturnFieldsResult" type="tns:FieldInfoCollection" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllFields">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdapterName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllFieldsResult" type="tns:FieldInfoCollection" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchResultData" nillable="true" type="tns:SearchResultData" />
+      <s:element name="AdapterCollection" nillable="true" type="tns:AdapterCollection" />
+      <s:element name="FeatureSupported" nillable="true" type="tns:FeatureSupported" />
+      <s:element name="FieldInfoCollection" nillable="true" type="tns:FieldInfoCollection" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SpatialBoundarySearchSoapIn">
+    <wsdl:part name="parameters" element="tns:SpatialBoundarySearch" />
+  </wsdl:message>
+  <wsdl:message name="SpatialBoundarySearchSoapOut">
+    <wsdl:part name="parameters" element="tns:SpatialBoundarySearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="SpatialRadialSearchByEastingNorthingSoapIn">
+    <wsdl:part name="parameters" element="tns:SpatialRadialSearchByEastingNorthing" />
+  </wsdl:message>
+  <wsdl:message name="SpatialRadialSearchByEastingNorthingSoapOut">
+    <wsdl:part name="parameters" element="tns:SpatialRadialSearchByEastingNorthingResponse" />
+  </wsdl:message>
+  <wsdl:message name="SimpleSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:SimpleSearch" />
+  </wsdl:message>
+  <wsdl:message name="SimpleSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:SimpleSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:AdvancedSearch" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:AdvancedSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedCustomSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:AdvancedCustomSearch" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedCustomSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:AdvancedCustomSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapIn">
+    <wsdl:part name="parameters" element="tns:Search" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAdaptersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAdapters" />
+  </wsdl:message>
+  <wsdl:message name="GetAdaptersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAdaptersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchFieldsSupportedSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchFieldsSupported" />
+  </wsdl:message>
+  <wsdl:message name="SearchFieldsSupportedSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchFieldsSupportedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSearchFields" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSearchFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResultFieldsSupportedSoapIn">
+    <wsdl:part name="parameters" element="tns:ResultFieldsSupported" />
+  </wsdl:message>
+  <wsdl:message name="ResultFieldsSupportedSoapOut">
+    <wsdl:part name="parameters" element="tns:ResultFieldsSupportedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetResultFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetResultFields" />
+  </wsdl:message>
+  <wsdl:message name="GetResultFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResultFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReturnFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReturnFields" />
+  </wsdl:message>
+  <wsdl:message name="GetReturnFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReturnFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllFields" />
+  </wsdl:message>
+  <wsdl:message name="GetAllFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SpatialBoundarySearchHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="Boundary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SpatialBoundarySearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="SpatialRadialSearchByEastingNorthingHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="Easting" type="s:string" />
+    <wsdl:part name="Northing" type="s:string" />
+    <wsdl:part name="Unit" type="s:string" />
+    <wsdl:part name="Distance" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SpatialRadialSearchByEastingNorthingHttpGetOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="SimpleSearchHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="SearchText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SimpleSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedSearchHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="SearchText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="GetAdaptersHttpGetIn" />
+  <wsdl:message name="GetAdaptersHttpGetOut">
+    <wsdl:part name="Body" element="tns:AdapterCollection" />
+  </wsdl:message>
+  <wsdl:message name="SearchFieldsSupportedHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchFieldsSupportedHttpGetOut">
+    <wsdl:part name="Body" element="tns:FeatureSupported" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchFieldsHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchFieldsHttpGetOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:message name="ResultFieldsSupportedHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResultFieldsSupportedHttpGetOut">
+    <wsdl:part name="Body" element="tns:FeatureSupported" />
+  </wsdl:message>
+  <wsdl:message name="GetResultFieldsHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetResultFieldsHttpGetOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:message name="GetReturnFieldsHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReturnFieldsHttpGetOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:message name="GetAllFieldsHttpGetIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllFieldsHttpGetOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:message name="SpatialBoundarySearchHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="Boundary" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SpatialBoundarySearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="SpatialRadialSearchByEastingNorthingHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="Easting" type="s:string" />
+    <wsdl:part name="Northing" type="s:string" />
+    <wsdl:part name="Unit" type="s:string" />
+    <wsdl:part name="Distance" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SpatialRadialSearchByEastingNorthingHttpPostOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="SimpleSearchHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="SearchText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SimpleSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedSearchHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+    <wsdl:part name="SearchText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AdvancedSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:SearchResultData" />
+  </wsdl:message>
+  <wsdl:message name="GetAdaptersHttpPostIn" />
+  <wsdl:message name="GetAdaptersHttpPostOut">
+    <wsdl:part name="Body" element="tns:AdapterCollection" />
+  </wsdl:message>
+  <wsdl:message name="SearchFieldsSupportedHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchFieldsSupportedHttpPostOut">
+    <wsdl:part name="Body" element="tns:FeatureSupported" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchFieldsHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSearchFieldsHttpPostOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:message name="ResultFieldsSupportedHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ResultFieldsSupportedHttpPostOut">
+    <wsdl:part name="Body" element="tns:FeatureSupported" />
+  </wsdl:message>
+  <wsdl:message name="GetResultFieldsHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetResultFieldsHttpPostOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:message name="GetReturnFieldsHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReturnFieldsHttpPostOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:message name="GetAllFieldsHttpPostIn">
+    <wsdl:part name="AdapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllFieldsHttpPostOut">
+    <wsdl:part name="Body" element="tns:FieldInfoCollection" />
+  </wsdl:message>
+  <wsdl:portType name="SearchServiceSoap">
+    <wsdl:operation name="SpatialBoundarySearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Spatial Search by Well Known Text(WKT) against the specified adapter. The WKT needs to be a string containing a valid POLYGON. A valid WKT Polygon should be in the format : POLYGON((number number, number number, number number, number number)) The AdapterName may be either the Tag or the Label of the required Adapter. Note** Oracle 10G and above Only </wsdl:documentation>
+      <wsdl:input message="tns:SpatialBoundarySearchSoapIn" />
+      <wsdl:output message="tns:SpatialBoundarySearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SpatialRadialSearchByEastingNorthing">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Spatial Radial Search by Easting and Northing to the specified adapter. Distance can be KM, Mile, Meter or Foot. Distance can be any positive numeric value. The AdapterName may be either the Tag or the Label of the required Adapter. If no Unit and Distance is entered, then a search on Easting and Nothing only will be carried out. If the AdapterName is left blank, the first available adapter will be used.Note** SQL Server 2008 and Oracle 10G and above Only </wsdl:documentation>
+      <wsdl:input message="tns:SpatialRadialSearchByEastingNorthingSoapIn" />
+      <wsdl:output message="tns:SpatialRadialSearchByEastingNorthingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SimpleSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Simple Search to the specified adapter. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:SimpleSearchSoapIn" />
+      <wsdl:output message="tns:SimpleSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits an Advanced Search to the specified adapter, using '|' delimited queries. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:AdvancedSearchSoapIn" />
+      <wsdl:output message="tns:AdvancedSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedCustomSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits an Advanced Search on the specified adapter, using '|' delimited queries. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used. The search criteria must be defined in the QueryToken object that is passed in as the token parameter.</wsdl:documentation>
+      <wsdl:input message="tns:AdvancedCustomSearchSoapIn" />
+      <wsdl:output message="tns:AdvancedCustomSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a search on the specified adapter, identified using the AdapterName which may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used. The search criteria must be defined in the QueryToken object that is passed in as the token parameter.</wsdl:documentation>
+      <wsdl:input message="tns:SearchSoapIn" />
+      <wsdl:output message="tns:SearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdapters">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an array of objects that describe each adapter published by this service</wsdl:documentation>
+      <wsdl:input message="tns:GetAdaptersSoapIn" />
+      <wsdl:output message="tns:GetAdaptersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchFieldsSupported">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns true or false for whether the Adapter supports the feature for getting a list of fields it can be searched on. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:SearchFieldsSupportedSoapIn" />
+      <wsdl:output message="tns:SearchFieldsSupportedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'Search' keyword is not 'false'. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetSearchFieldsSoapIn" />
+      <wsdl:output message="tns:GetSearchFieldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResultFieldsSupported">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns true or false for whether the AdapterName passed in supports the feature for getting a list of fields that will be returned when a search is performed. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:ResultFieldsSupportedSoapIn" />
+      <wsdl:output message="tns:ResultFieldsSupportedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResultFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'resultslist' keyword is not 'false'.  If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetResultFieldsSoapIn" />
+      <wsdl:output message="tns:GetResultFieldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReturnFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'return' keyword is not 'false'. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetReturnFieldsSoapIn" />
+      <wsdl:output message="tns:GetReturnFieldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of all the fields defined for the supplied AdapterName. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllFieldsSoapIn" />
+      <wsdl:output message="tns:GetAllFieldsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SearchServiceHttpGet">
+    <wsdl:operation name="SpatialBoundarySearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Spatial Search by Well Known Text(WKT) against the specified adapter. The WKT needs to be a string containing a valid POLYGON. A valid WKT Polygon should be in the format : POLYGON((number number, number number, number number, number number)) The AdapterName may be either the Tag or the Label of the required Adapter. Note** Oracle 10G and above Only </wsdl:documentation>
+      <wsdl:input message="tns:SpatialBoundarySearchHttpGetIn" />
+      <wsdl:output message="tns:SpatialBoundarySearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SpatialRadialSearchByEastingNorthing">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Spatial Radial Search by Easting and Northing to the specified adapter. Distance can be KM, Mile, Meter or Foot. Distance can be any positive numeric value. The AdapterName may be either the Tag or the Label of the required Adapter. If no Unit and Distance is entered, then a search on Easting and Nothing only will be carried out. If the AdapterName is left blank, the first available adapter will be used.Note** SQL Server 2008 and Oracle 10G and above Only </wsdl:documentation>
+      <wsdl:input message="tns:SpatialRadialSearchByEastingNorthingHttpGetIn" />
+      <wsdl:output message="tns:SpatialRadialSearchByEastingNorthingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SimpleSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Simple Search to the specified adapter. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:SimpleSearchHttpGetIn" />
+      <wsdl:output message="tns:SimpleSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits an Advanced Search to the specified adapter, using '|' delimited queries. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:AdvancedSearchHttpGetIn" />
+      <wsdl:output message="tns:AdvancedSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdapters">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an array of objects that describe each adapter published by this service</wsdl:documentation>
+      <wsdl:input message="tns:GetAdaptersHttpGetIn" />
+      <wsdl:output message="tns:GetAdaptersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchFieldsSupported">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns true or false for whether the Adapter supports the feature for getting a list of fields it can be searched on. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:SearchFieldsSupportedHttpGetIn" />
+      <wsdl:output message="tns:SearchFieldsSupportedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'Search' keyword is not 'false'. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetSearchFieldsHttpGetIn" />
+      <wsdl:output message="tns:GetSearchFieldsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResultFieldsSupported">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns true or false for whether the AdapterName passed in supports the feature for getting a list of fields that will be returned when a search is performed. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:ResultFieldsSupportedHttpGetIn" />
+      <wsdl:output message="tns:ResultFieldsSupportedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResultFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'resultslist' keyword is not 'false'.  If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetResultFieldsHttpGetIn" />
+      <wsdl:output message="tns:GetResultFieldsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReturnFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'return' keyword is not 'false'. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetReturnFieldsHttpGetIn" />
+      <wsdl:output message="tns:GetReturnFieldsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of all the fields defined for the supplied AdapterName. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllFieldsHttpGetIn" />
+      <wsdl:output message="tns:GetAllFieldsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SearchServiceHttpPost">
+    <wsdl:operation name="SpatialBoundarySearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Spatial Search by Well Known Text(WKT) against the specified adapter. The WKT needs to be a string containing a valid POLYGON. A valid WKT Polygon should be in the format : POLYGON((number number, number number, number number, number number)) The AdapterName may be either the Tag or the Label of the required Adapter. Note** Oracle 10G and above Only </wsdl:documentation>
+      <wsdl:input message="tns:SpatialBoundarySearchHttpPostIn" />
+      <wsdl:output message="tns:SpatialBoundarySearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SpatialRadialSearchByEastingNorthing">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Spatial Radial Search by Easting and Northing to the specified adapter. Distance can be KM, Mile, Meter or Foot. Distance can be any positive numeric value. The AdapterName may be either the Tag or the Label of the required Adapter. If no Unit and Distance is entered, then a search on Easting and Nothing only will be carried out. If the AdapterName is left blank, the first available adapter will be used.Note** SQL Server 2008 and Oracle 10G and above Only </wsdl:documentation>
+      <wsdl:input message="tns:SpatialRadialSearchByEastingNorthingHttpPostIn" />
+      <wsdl:output message="tns:SpatialRadialSearchByEastingNorthingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SimpleSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits a Simple Search to the specified adapter. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:SimpleSearchHttpPostIn" />
+      <wsdl:output message="tns:SimpleSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Submits an Advanced Search to the specified adapter, using '|' delimited queries. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:AdvancedSearchHttpPostIn" />
+      <wsdl:output message="tns:AdvancedSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdapters">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an array of objects that describe each adapter published by this service</wsdl:documentation>
+      <wsdl:input message="tns:GetAdaptersHttpPostIn" />
+      <wsdl:output message="tns:GetAdaptersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchFieldsSupported">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns true or false for whether the Adapter supports the feature for getting a list of fields it can be searched on. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:SearchFieldsSupportedHttpPostIn" />
+      <wsdl:output message="tns:SearchFieldsSupportedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'Search' keyword is not 'false'. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetSearchFieldsHttpPostIn" />
+      <wsdl:output message="tns:GetSearchFieldsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResultFieldsSupported">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns true or false for whether the AdapterName passed in supports the feature for getting a list of fields that will be returned when a search is performed. The AdapterName may be either the Tag or the Label of the required Adapter. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:ResultFieldsSupportedHttpPostIn" />
+      <wsdl:output message="tns:ResultFieldsSupportedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResultFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'resultslist' keyword is not 'false'.  If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetResultFieldsHttpPostIn" />
+      <wsdl:output message="tns:GetResultFieldsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReturnFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of fields for the supplied AdapterName where the 'return' keyword is not 'false'. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetReturnFieldsHttpPostIn" />
+      <wsdl:output message="tns:GetReturnFieldsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of all the fields defined for the supplied AdapterName. If the AdapterName is left blank, the first available adapter will be used.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllFieldsHttpPostIn" />
+      <wsdl:output message="tns:GetAllFieldsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SearchServiceSoap" type="tns:SearchServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SpatialBoundarySearch">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SpatialBoundarySearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SpatialRadialSearchByEastingNorthing">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SpatialRadialSearchByEastingNorthing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SimpleSearch">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SimpleSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedSearch">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/AdvancedSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedCustomSearch">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/AdvancedCustomSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdapters">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetAdapters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchFieldsSupported">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SearchFieldsSupported" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchFields">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetSearchFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResultFieldsSupported">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/ResultFieldsSupported" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResultFields">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetResultFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReturnFields">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetReturnFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFields">
+      <soap:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetAllFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SearchServiceSoap12" type="tns:SearchServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SpatialBoundarySearch">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SpatialBoundarySearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SpatialRadialSearchByEastingNorthing">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SpatialRadialSearchByEastingNorthing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SimpleSearch">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SimpleSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedSearch">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/AdvancedSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedCustomSearch">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/AdvancedCustomSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdapters">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetAdapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchFieldsSupported">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/SearchFieldsSupported" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchFields">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetSearchFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResultFieldsSupported">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/ResultFieldsSupported" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResultFields">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetResultFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReturnFields">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetReturnFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFields">
+      <soap12:operation soapAction="http://www.aligned-assets.co.uk/SinglePoint/Search/WebServices/SearchService/GetAllFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SearchServiceHttpGet" type="tns:SearchServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SpatialBoundarySearch">
+      <http:operation location="/SpatialBoundarySearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SpatialRadialSearchByEastingNorthing">
+      <http:operation location="/SpatialRadialSearchByEastingNorthing" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SimpleSearch">
+      <http:operation location="/SimpleSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedSearch">
+      <http:operation location="/AdvancedSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdapters">
+      <http:operation location="/GetAdapters" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchFieldsSupported">
+      <http:operation location="/SearchFieldsSupported" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchFields">
+      <http:operation location="/GetSearchFields" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResultFieldsSupported">
+      <http:operation location="/ResultFieldsSupported" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResultFields">
+      <http:operation location="/GetResultFields" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReturnFields">
+      <http:operation location="/GetReturnFields" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFields">
+      <http:operation location="/GetAllFields" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SearchServiceHttpPost" type="tns:SearchServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SpatialBoundarySearch">
+      <http:operation location="/SpatialBoundarySearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SpatialRadialSearchByEastingNorthing">
+      <http:operation location="/SpatialRadialSearchByEastingNorthing" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SimpleSearch">
+      <http:operation location="/SimpleSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdvancedSearch">
+      <http:operation location="/AdvancedSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdapters">
+      <http:operation location="/GetAdapters" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchFieldsSupported">
+      <http:operation location="/SearchFieldsSupported" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSearchFields">
+      <http:operation location="/GetSearchFields" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResultFieldsSupported">
+      <http:operation location="/ResultFieldsSupported" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResultFields">
+      <http:operation location="/GetResultFields" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReturnFields">
+      <http:operation location="/GetReturnFields" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllFields">
+      <http:operation location="/GetAllFields" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SearchService">
+    <wsdl:port name="SearchServiceSoap" binding="tns:SearchServiceSoap">
+      <soap:address location="http://lobamba.lan.guildford.gov.uk/SinglePoint/SearchService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SearchServiceSoap12" binding="tns:SearchServiceSoap12">
+      <soap12:address location="http://lobamba.lan.guildford.gov.uk/SinglePoint/SearchService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SearchServiceHttpGet" binding="tns:SearchServiceHttpGet">
+      <http:address location="http://lobamba.lan.guildford.gov.uk/SinglePoint/SearchService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SearchServiceHttpPost" binding="tns:SearchServiceHttpPost">
+      <http:address location="http://lobamba.lan.guildford.gov.uk/SinglePoint/SearchService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

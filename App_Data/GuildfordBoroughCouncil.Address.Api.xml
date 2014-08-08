@@ -1,0 +1,928 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GuildfordBoroughCouncil.Address.Api</name>
+    </assembly>
+    <members>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller">
+            <summary>
+            Address lookup version 2.
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.ByUprn(System.Int64,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean)">
+            <summary>
+            Lookup addresses by UPRN.
+            </summary>
+            <param name="Uprn">The UPRN to lookup</param>
+            <param name="Scope">What is the scope for the search?</param>
+            <param name="IncludeHistorical">Include historical records for the UPRN</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.OnStreet(System.Int64,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean)">
+            <summary>
+            Lookup addresses by USRN.
+            </summary>
+            <param name="Usrn">The USRN to lookup</param>
+            <param name="Scope">What is the scope for the search?</param>
+            <param name="IncludeHistorical">Include historical records for the USRN</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.ByPostCode(System.String,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean)">
+            <summary>
+            Lookup addresses by post code.
+            </summary>
+            <param name="Id">The post code to lookup</param>
+            <param name="Scope">What is the scope for the search?</param>
+            <param name="IncludeHistorical">Include historical records?</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.Nearest(GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Double,System.Double,System.Double)">
+            <summary>
+            Find the nearest addresses for the given co-ordinates.
+            </summary>
+            <param name="Scope">What is the scope for the search?</param>
+            <param name="Long">Logitude</param>
+            <param name="Lat">Latitude</param>
+            <param name="Accuracy">Accuracy (in metres)</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.BySomething(System.String,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean)">
+            <summary>
+            Lookup addresses by something.
+            </summary>
+            <param name="Query">The query term (e.g. UPRN, USRN, post code, partial property address)</param>
+            <param name="Scope">What is the scope for the search?</param>
+            <param name="IncludeHistorical">Include historical records?</param>
+            <returns></returns>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV1Controller">
+            <summary>
+            Address lookup version 1. - *DEPRECATED*
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV1Controller.ByUprn(System.Int64,System.Boolean,System.Boolean)">
+            <summary>
+            Lookup addresses by UPRN.
+            </summary>
+            <param name="Uprn">The UPRN to lookup</param>
+            <param name="CheckNational">If no results are found in the LLPG, should AddressBase be searched?</param>
+            <param name="IncludeHistorical">Include historical records for the UPRN</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV1Controller.OnStreet(System.Int64,System.Boolean,System.Boolean)">
+            <summary>
+            Lookup addresses by USRN.
+            </summary>
+            <param name="Usrn">The USRN to lookup</param>
+            <param name="CheckNational">If no results are found in the LLPG, should AddressBase be searched?</param>
+            <param name="IncludeHistorical">Include historical records for the USRN</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV1Controller.ByPostCode(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Lookup addresses by post code.
+            </summary>
+            <param name="Id">The post code to lookup</param>
+            <param name="CheckNational">If no results are found in the LLPG, should AddressBase be searched?</param>
+            <param name="IncludeHistorical">Include historical records?</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV1Controller.Nearest(System.Boolean,System.Double,System.Double,System.Double)">
+            <summary>
+            Find the nearest addresses for the given co-ordinates.
+            </summary>
+            <param name="CheckNational">If no results are found in the LLPG, should AddressBase be searched?</param>
+            <param name="Long">Logitude</param>
+            <param name="Lat">Latitude</param>
+            <param name="Accuracy">Accuracy (in metres)</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV1Controller.BySomething(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Lookup addresses by something.
+            </summary>
+            <param name="Query">The query term (e.g. UPRN, USRN, post code, partial property address)</param>
+            <param name="CheckNational">If no results are found in the LLPG, should AddressBase be searched?</param>
+            <param name="IncludeHistorical">Include historical records?</param>
+            <returns></returns>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.Controllers.TypeaheadV2Controller">
+            <summary>
+            A lookup service to support Twitter's TypeAhead.js - http://twitter.github.io/typeahead.js/
+            </summary>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.TypeaheadV2Controller.ByPostCode(System.String,System.Boolean,GuildfordBoroughCouncil.Address.Models.AddressSearchScope)">
+            <summary>
+            Lookup addresses by post code.
+            </summary>
+            <param name="q">The post code to lookup</param>
+            <param name="IncludeHistorical">Include historical records?</param>
+            <param name="Scope">What is the scope for the search?</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.TypeaheadV2Controller.BySomething(System.String,System.Boolean,GuildfordBoroughCouncil.Address.Models.AddressSearchScope)">
+            <summary>
+            Lookup addresses by something.
+            </summary>
+            <param name="q">The query term (e.g. UPRN, USRN, post code, partial property address)</param>
+            <param name="IncludeHistorical">Include historical records?</param>
+            <param name="Scope">What is the scope for the search?</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Lookup.Data.FindNearest(System.Double,System.Double,System.Double,GuildfordBoroughCouncil.Address.Models.AddressSearchScope)">
+            <summary>
+            
+            </summary>
+            <param name="Long"></param>
+            <param name="Lat"></param>
+            <param name="Distance">Any positive value</param>
+            <returns></returns>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultData">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceResult">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceResult.Error">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultData.Results">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResults">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResults.Items">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResults.PageCount">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResults.FullResultsCount">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResults.Token">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResults.BluelightDataSet">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem.FullAddress">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem.ManagementSystemUrl">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem.TrackerValue">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem.FieldItems">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem.FormattedAddressElements">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem.Coordinates">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultItem.TextToDisplay">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.dataType">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.IsIndex">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.IsSearchField">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.IsReturnField">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.IsResultListField">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.IsAddressField">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.AddressClass">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.Tag">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.Title">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.Description">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.Expression">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.Group">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.Sequence">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.Value">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.ValueIsBlank">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.DefaultValue">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.DataValuesList">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.AutoCompleteType">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfo.ValuesAreInWebConfig">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType.String">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType.Number">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType.Bool">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType.MultiSelectList">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType.AutoCompleteString">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType.Label">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldDataType.Hidden">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldAutoCompleteType">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldAutoCompleteType.None">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldAutoCompleteType.Postcodes">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldAutoCompleteType.Streets">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldAutoCompleteType.Units">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterInfo">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterInfo.Key">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterInfo.Label">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterInfo.Description">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterInfo.Nlpg">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterInfo.Tag">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchField">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchField.Tag">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchField.Field">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchField.Options">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.TextSearchOptions">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.TextSearchOptions.MatchPartialValues">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.TextSearchOptions.PhoneticSearch">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.AnonymousSearchText">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AnonymousSearchText.Value">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AnonymousSearchText.Options">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.IsWebServiceSearch">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.TotalResultsFound">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.IsSpatialSearch">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.PagedResults">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.PageItemCount">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.PageIndex">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.PageLookAheadCount">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.OrderByFieldTags">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.ReturnFieldTags">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.ReturnAllFields">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.MinItemRowNum">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.MaxItemRowNum">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.CommandTimeout">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.IsAdddressBaseData">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchToken.ReturnQasNameRawAddress">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.TextSearchToken">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.TextSearchToken.SearchMode">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchMode">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchMode.DrillDown">
+            <remarks/>
+        </member>
+        <member name="F:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchMode.AllFound">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.QueryToken">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.QueryToken.SearchText">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.QueryToken.QualifiedValues">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.BNGCoordinates">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.BNGCoordinates.Easting">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.BNGCoordinates.Northing">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceError">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceError.ErrorType">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceError.Message">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfoCollection">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfoCollection.Fields">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.FeatureSupported">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.FeatureSupported.Value">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterCollection">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.AdapterCollection.Adapters">
+            <remarks/>
+        </member>
+    </members>
+</doc>

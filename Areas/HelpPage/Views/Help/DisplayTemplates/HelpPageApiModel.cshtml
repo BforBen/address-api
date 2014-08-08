@@ -1,0 +1,66 @@
+@using System.Web.Http
+@using System.Web.Http.Description
+@using GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.Models
+@using GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ModelDescriptions
+@model HelpPageApiModel
+
+@{
+    ApiDescription description = Model.ApiDescription;
+}
+<div>
+    <p>@description.Documentation</p>
+
+    <h2>Request information</h2>
+
+    <h3>Uri parameters</h3>
+    @Html.DisplayFor(m => m.UriParameters, "Parameters")
+
+    <h3>Body parameters</h3>
+
+    <p>@Model.RequestDocumentation</p>
+
+    @if (Model.RequestModelDescription != null)
+    {
+        @Html.DisplayFor(m => m.RequestModelDescription.ModelType, "ModelDescriptionLink", new { modelDescription = Model.RequestModelDescription })
+        if (Model.RequestBodyParameters != null)
+        {
+            @Html.DisplayFor(m => m.RequestBodyParameters, "Parameters")
+        }
+    }
+    else
+    {
+        <p>None.</p>
+    }
+
+    @if (Model.SampleRequests.Count > 0)
+    {
+        <h3>Request Formats</h3>
+        @Html.DisplayFor(m => m.SampleRequests, "Samples")
+    }
+
+    <h2>Response information</h2>
+
+    <h3>Resource description</h3>
+
+    <p>@description.ResponseDescription.Documentation</p>
+
+    @if (Model.ResourceDescription != null)
+    {
+        @Html.DisplayFor(m => m.ResourceDescription.ModelType, "ModelDescriptionLink", new { modelDescription = Model.ResourceDescription })
+        if (Model.ResourceProperties != null)
+        {
+            @Html.DisplayFor(m => m.ResourceProperties, "Parameters")
+        }
+    }
+    else
+    {
+        <p>None.</p>
+    }
+
+    @if (Model.SampleResponses.Count > 0)
+    {
+        <h3>Response formats</h3>
+        @Html.DisplayFor(m => m.SampleResponses, "Samples")
+    }
+
+</div>

@@ -1,0 +1,191 @@
+﻿@{
+    var ShowH1 = (bool?)ViewBag.ShowH1 ?? true;
+    var ShowBreadcrumb = (bool?)ViewContext.ViewData["ShowBreadcrumb"] ?? true;
+    var ShowFooter = (bool?)ViewBag.ShowFooter ?? true;
+
+    var IncludeJqueryUnob = (bool?)ViewContext.ViewData["IncludeJqueryUnob"] ?? false;
+    var IncludeJqueryVal = (bool?)ViewContext.ViewData["IncludeJqueryVal"] ?? false;
+    var IncludeJqueryUi = (bool?)ViewContext.ViewData["IncludeJqueryUi"] ?? false;
+    var IncludeCkeditor = (bool?)ViewContext.ViewData["IncludeCkeditor"] ?? false;
+    var IncludeJquerySignalR = (bool?)ViewContext.ViewData["IncludeJquerySignalR"] ?? false;
+
+    string HomeUrl = (string)ViewContext.ViewData["HomeUrl"] ?? Url.Content("~/");
+    string HomeTitle = (string)ViewContext.ViewData["HomeTitle"] ?? "Link to home";
+    string IctUrl = (string)ViewContext.ViewData["IctUrl"] ?? "http://intranet/BusinessSystems";
+
+    string StyleSheet = ((bool?)ViewContext.ViewData["LegacyStyle"] ?? false) ? "legacy" : "merged";
+    string ResourcePrefix = ((bool?)ViewContext.ViewData["ResourcePrefix"] ?? false) ? "web-" : String.Empty;
+
+    string FullWidth = ((bool?)ViewContext.ViewData["FullWidthBody"] ?? false) ? "-fluid" : String.Empty;
+
+    string FullWidthBodyRow = ((bool?)ViewContext.ViewData["FullWidthBody"] ?? false) ? " col-md-12 col-lg-offset-1 col-lg-10" : String.Empty;
+    
+    string ResourceDomain = (string)ViewContext.ViewData["ResourceDomain"] ?? "www2";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>@if (!String.IsNullOrWhiteSpace(ViewBag.Title)) { <text>@ViewBag.Title - </text> }@ViewContext.ViewData["ApplicationName"]</title>
+    <link href="//@(ResourceDomain).guildford.gov.uk/_resources/modern/v3/css/@(StyleSheet).min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <link href="//@(ResourceDomain).guildford.gov.uk/_resources/modern/v3/respond-proxy/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="/_resources/ie8/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+    <script src="/_resources/ie8/html5shiv.js"></script>
+    <script src="/_resources/ie8/respond.min.js"></script>
+    <script src="/_resources/ie8/respond.proxy.js"></script>
+    <script src="//@(ResourceDomain).guildford.gov.uk/_resources/modern/v3/scripts/@(ResourcePrefix)merged.ie8.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    @if (StyleSheet == "merged") { <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700|Lato:400,700|Arvo" rel="stylesheet"> }
+    <script src="//@(ResourceDomain).guildford.gov.uk/_resources/modern/v3/scripts/@(ResourcePrefix)merged.min.js"></script>
+    <!-- <![endif]-->
+@if (IncludeJqueryUnob)
+{
+    <script src="//@(ResourceDomain).guildford.gov.uk/_resources/jquery/jquery.unobtrusive-ajax.min.js"></script>
+}
+@if (IncludeJqueryVal)
+{
+    <script src="//@(ResourceDomain).guildford.gov.uk/_resources/jquery/jquery.validate.merged.min.js"></script>
+}
+@if (IncludeJqueryUi)
+{
+    <script src="//@(ResourceDomain).guildford.gov.uk/_resources/modern/v2/scripts/jquery-ui.min.js"></script>
+    <link href="//@(ResourceDomain).guildford.gov.uk/_resources/modern/v2/css/jquery-ui/minified/jquery-ui.min.css" rel="stylesheet">
+}
+@if (IncludeCkeditor)
+{
+    <script src="//@(ResourceDomain).guildford.gov.uk/_resources/ckeditor/ckeditor.js"></script>
+    <script src="//@(ResourceDomain).guildford.gov.uk/_resources/ckeditor/adapters/jquery.js"></script>
+}
+@if (IncludeJquerySignalR)
+{
+    <script src="//www2.guildford.gov.uk/_resources/jquery/jquery.signalR.min.js"></script>
+}
+    <script>
+        var BaseUrl = '@Url.Content("~/")';
+    </script>
+@RenderSection("Scripts", required: false)
+</head>
+<body id="top">
+    <div class="sr-only">
+        <a href="#content" accesskey="S"><span>Skip to Content</span></a>
+    </div>
+    <nav class="navbar navbar-default navbar-head" role="navigation">
+        <div class="container@(FullWidth)">
+            <div class="navbar-header">
+                @if (IsSectionDefined("PrimaryNavigation"))
+                {
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-head-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                }
+                <a href="@HomeUrl" title="@HomeTitle" class="navbar-brand">
+                    <img title="Guildford Borough Council" alt="Guildford Borough Council logo" src="//@(ResourceDomain).guildford.gov.uk/_resources/modern/v3/images/gbc-logo.png" width="276" height="67">
+                </a>
+            </div>
+            <ul class="nav pull-right dyslexia invisible">
+                <li title="Switch to dyslexic font" class="on"><span>D<span class="hide"> Dyslexic Font</span></span></li>
+                <li title="Switch to standard font" class="off"><span>D<span class="hide"> Standard Font</span></span></li>
+            </ul>
+            <ul class="nav pull-right contrast invisible">
+                <li title="Switch to high contrast display" class="on"><span>A<span class="hide"> High Contrast</span></span></li>
+                <li title="Switch to low contrast display" class="off"><span>A<span class="hide"> Low Contrast</span></span></li>
+            </ul>
+            @if (IsSectionDefined("PrimaryNavigation"))
+            {
+            <div class="collapse navbar-collapse navbar-head-collapse">
+                <ul class="nav navbar-nav nav-pills pull-right">
+                    @RenderSection("PrimaryNavigation", required: false)
+                </ul>
+            </div>
+            }
+        </div>
+    </nav>
+
+    <div class="container@(FullWidth)" id="content">
+        <hr class="content-divider">
+        @if (IsSectionDefined("SecondaryNavigation"))
+        {
+            <nav class="navbar navbar-default navbar-secondary" role="navigation">
+                <ul class="nav navbar-nav">
+                    @RenderSection("SecondaryNavigation", required: false)
+                </ul>
+            </nav>
+        }
+        @if (ShowBreadcrumb)
+        {
+            <div class="row">
+                <div class="col-xs-12@(FullWidthBodyRow)">
+                    <div class="breadcrumb">
+                        <small><strong>You are in:</strong></small>
+                        <ol class="list-unstyled">
+                            @if (!IsSectionDefined("Breadcrumb"))
+                            {
+                                <li><small><a href="~/">@((string)ViewContext.ViewData["ApplicationName"])</a></small></li>
+                                if (ViewContext.ViewData["Controller"] != null && ViewContext.RouteData.GetRequiredString("action") != "Index")
+                                {
+                                    <li><small> / @Html.ActionLink((string)ViewContext.ViewData["Controller"], "Index")</small></li>
+                                }
+                                <li><small> / <span>@ViewBag.Title</span></small></li>
+                            }
+                            @RenderSection("Breadcrumb", required: false)
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-xs-12@(FullWidthBodyRow)">
+                @if (ShowH1)
+                {
+                    <div class="page-header">
+                        <h1>@ViewBag.Title</h1>
+                    </div>
+                }
+
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+@if (ShowFooter)
+{
+<footer>
+    <div class="container@(FullWidth)">
+        <div class="row">
+            <div class="col-xs-12@(FullWidthBodyRow)">
+                @if (IsSectionDefined("Footer"))
+                {
+                    <div class="row">
+                        @RenderSection("Footer", required: false)
+                    </div>
+                }
+                <div class="row footer-appInfo">
+                    <div class="col-md-6">
+                        @if (!String.IsNullOrWhiteSpace((string)ViewContext.ViewData["SupportUrl"]))
+                        { <a href="@ViewContext.ViewData["SupportUrl"]" class="btn btn-link">Support</a> } @if (!String.IsNullOrWhiteSpace((string)ViewContext.ViewData["FeedbackUrl"]))
+                        { <a href="@ViewContext.ViewData["FeedbackUrl"]" class="btn btn-link">Feedback</a> }
+                    </div>
+                    <div class="col-md-6 text-right">
+                        @ViewContext.ViewData["ApplicationName"] @ViewContext.ViewData["ApplicationVersion"] - Built by <a href="@IctUrl">Business Systems</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+}
+    <div id="loading" class="hide">
+        <div>Working on it...</div>
+    </div>
+
+    <div class="modal-bg"></div>
+    <div class="modal-content" id="modal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+</body>
+</html>

@@ -45,9 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetCoords, Version=1.0.0.14, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DotNetCoords, Version=1.0.0.15, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DotNetCoords.dll</HintPath>
+      <HintPath>packages\DotNetCoords.1.0.0\lib\net20\DotNetCoords.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>

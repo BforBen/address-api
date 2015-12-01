@@ -606,7 +606,7 @@
             <param name="Scope">What is the scope for the search?</param>
             <returns></returns>
         </member>
-        <member name="M:GuildfordBoroughCouncil.Address.Api.Lookup.Data.FindNearest(System.Double,System.Double,System.Double,GuildfordBoroughCouncil.Address.Models.AddressSearchScope)">
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Lookup.Data.FindNearest(System.Double,System.Double,System.Double,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.String)">
             <summary>
             
             </summary>

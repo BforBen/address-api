@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 using System.Web.Mvc;
+
+using Serilog;
+using SerilogWeb.Classic.Enrichers;
 
 namespace GuildfordBoroughCouncil.Address.Api
 {
@@ -16,11 +16,28 @@ namespace GuildfordBoroughCouncil.Address.Api
         protected void Application_Start()
         {
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            RouteTable.Routes.LowercaseUrls = true;
+            
             AreaRegistration.RegisterAllAreas();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
+            var Logger = new LoggerConfiguration()
+                .WriteTo.Seq(Properties.Settings.Default.SeqLogUrl, apiKey: Properties.Settings.Default.SeqLogKey, bufferBaseFilename: AppDomain.CurrentDomain.BaseDirectory + @"App_Data\Logs")
+                .Enrich.WithMachineName()
+                .Enrich.With<HttpRequestUrlEnricher>()
+                .Enrich.WithThreadId()
+                .Enrich.With<HttpRequestClientHostIPEnricher>()
+                .Enrich.WithProcessId()
+                .Enrich.With<HttpRequestIdEnricher>()
+                .Enrich.With<HttpRequestTypeEnricher>()
+                .Enrich.With<HttpRequestUserAgentEnricher>()
+                .Enrich.With<HttpRequestUrlReferrerEnricher>();
+
+            Log.Logger = Logger.CreateLogger();
+
+            Log.Debug("Address API started.");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GuildfordBoroughCouncil.Services.Address.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GuildfordBoroughCouncil.Address.Api.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="ThisAuthorityCode" Type="System.Int32" Scope="Application">
@@ -19,6 +19,12 @@
     </Setting>
     <Setting Name="ThisAuthorityName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Guildford Borough</Value>
+    </Setting>
+    <Setting Name="SeqLogKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">a69mKHAkqt4bWdrKOS</Value>
+    </Setting>
+    <Setting Name="SeqLogUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:5341/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

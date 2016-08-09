@@ -27,11 +27,11 @@ namespace GuildfordBoroughCouncil.Address.Api.Lookup
             return string.Empty;
         }
 
-        public static GuildfordBoroughCouncil.Address.Models.Address ToAddress(this SearchResultItem result, AddressSearchScope Scope)
+        public static Address.Models.Address ToAddress(this SearchResultItem result, AddressSearchScope Scope)
         {
             if (result != null)
             {
-                var Address = new GuildfordBoroughCouncil.Address.Models.Address();
+                var Address = new Address.Models.Address();
 
                 string FormattedAddress;
 
@@ -180,7 +180,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Lookup
             }
         }
 
-        private static async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> AdvancedSearch(string SearchText, AddressSearchScope Scope, string Category = "Residential")
+        private static async Task<IEnumerable<Address.Models.Address>> AdvancedSearch(string SearchText, AddressSearchScope Scope, IEnumerable<string> Category = null, bool PostallyAddressable = true)
         {
             SearchServiceSoapClient SPClient = new SearchServiceSoapClient();
 
@@ -189,43 +189,58 @@ namespace GuildfordBoroughCouncil.Address.Api.Lookup
             SearchResultData Search = await SPClient.AdvancedSearchAsync("LLPG", SearchText);
             var ResultsScope = AddressSearchScope.Local;
 
-            var Llpg = Search.Results.Items.Select(r => r.ToAddress(ResultsScope)).ToList();
+            var Llpg = Search.Results.Items
+                .WhereIf(PostallyAddressable, r =>
+                    r.FieldItems.Where(f => f.Tag == "POSTALLY_ADDRESSABLE").SingleOrDefault() != null &&
+                    r.FieldItems.Where(f => f.Tag == "POSTALLY_ADDRESSABLE").SingleOrDefault().Value == "Y"
+                )
+                .Select(r => r.ToAddress(ResultsScope)).ToList();
 
+            // Fix for multiple properties with the same UPRN coming back in the results and only returning the active one.
+            Llpg = Llpg.OrderBy(r => r.Uprn).ThenBy(r => r.Status).GroupBy(r => r.Uprn).Select(r => r.First()).ToList();
             #endregion
 
             #region Search AddressBase
 
             IEnumerable<Address.Models.Address> AddressBase = new List<Address.Models.Address>();
 
-            Search = await SPClient.AdvancedSearchAsync("AddressBase", SearchText);
-            ResultsScope = Scope;
+            // Only search AddressBase when searching by UPRN if the LLPG search doesn't find anything
+            if (SearchText.StartsWith("UPRN=") && Llpg.Count() > 0)
+            {
 
-            AddressBase = Search.Results.Items.Select(r => r.ToAddress(ResultsScope))
-                .WhereIf(ResultsScope == AddressSearchScope.LocalPlusSurrounding, r => LocalPlusSurrounding.Contains(r.AuthorityCode.Value))
-                .WhereIf(ResultsScope == AddressSearchScope.Local, r => r.AuthorityCode == Properties.Settings.Default.ThisAuthorityCode).ToList();
+            }
+            else
+            {
+                Search = await SPClient.AdvancedSearchAsync("AddressBase", SearchText);
+                ResultsScope = Scope;
 
+                AddressBase = Search.Results.Items.Select(r => r.ToAddress(ResultsScope))
+                    .WhereIf(ResultsScope == AddressSearchScope.LocalPlusSurrounding, r => LocalPlusSurrounding.Contains(r.AuthorityCode.Value))
+                    .WhereIf(ResultsScope == AddressSearchScope.Local, r => r.AuthorityCode == Properties.Settings.Default.ThisAuthorityCode).ToList();
+            }
             #endregion
 
             // Combine Llpg with AddressBase
-            return Llpg.Union(AddressBase, new AddressComparer()).WhereIf(!String.IsNullOrWhiteSpace(Category), a => a.Classification.StartsWith(Category));
+            return Llpg.Union(AddressBase, new AddressComparer())
+                .WhereIf(Category != null && Category.Count() > 0, a => Category.Any(b => a.Classification.StartsWith(b)));
         }
 
-        public static async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> ByUprn(Int64 Uprn, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local)
+        public static async Task<IEnumerable<Address.Models.Address>> ByUprn(long Uprn, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local)
         {
-            return await AdvancedSearch("UPRN=" + Uprn.ToString() + ((IncludeHistorical) ? String.Empty : "|LOGICAL_STATUS=1"), AddressSearchScope.National, null);
+            return await AdvancedSearch("UPRN=" + Uprn.ToString() + ((IncludeHistorical) ? String.Empty : "|LOGICAL_STATUS=1"), AddressSearchScope.National, null, false);
         }
 
-        public static async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> ByStreet(Int64 Usrn, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local)
+        public static async Task<IEnumerable<Address.Models.Address>> ByStreet(long Usrn, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local, IEnumerable<string> Category = null, bool PostallyAddressable = true)
         {
-            return await AdvancedSearch("USRN=" + Usrn.ToString() + ((IncludeHistorical) ? String.Empty : "|LOGICAL_STATUS=1"), Scope);
+            return await AdvancedSearch("USRN=" + Usrn.ToString() + ((IncludeHistorical) ? String.Empty : "|LOGICAL_STATUS=1"), Scope, Category, PostallyAddressable);
         }
 
-        public static async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> ByPostCode(string PostCode, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local)
+        public static async Task<IEnumerable<Address.Models.Address>> ByPostCode(string PostCode, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local, IEnumerable<string> Category = null, bool PostallyAddressable = true)
         {
-            return await AdvancedSearch("POSTCODE=" + GuildfordBoroughCouncil.Address.PostCode.Format(PostCode) + ((IncludeHistorical) ? String.Empty : "|LOGICAL_STATUS=1"), Scope);
+            return await AdvancedSearch("POSTCODE=" + Address.PostCode.Format(PostCode) + ((IncludeHistorical) ? String.Empty : "|LOGICAL_STATUS=1"), Scope, Category, PostallyAddressable);
         }
 
-        public static async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> BySomething(string Query, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local, string Category = "Residential")
+        public static async Task<IEnumerable<Address.Models.Address>> BySomething(string Query, bool IncludeHistorical = false, AddressSearchScope Scope = AddressSearchScope.Local, IEnumerable<string> Category = null, bool PostallyAddressable = true)
         {
             var Filter = new List<AddressStatus>()
                 {
@@ -251,15 +266,22 @@ namespace GuildfordBoroughCouncil.Address.Api.Lookup
                 ReturnAllFields = true,
 
             });
+
             var ResultsScope = AddressSearchScope.Local;
 
-            var Llpg = Search.Results.Items.Select(r => r.ToAddress(ResultsScope)).Where(r => Filter.Contains(r.Status)).ToList();
+            var Llpg = Search.Results.Items
+                .WhereIf(PostallyAddressable, r => 
+                    r.FieldItems.Where(f => f.Tag == "POSTALLY_ADDRESSABLE").SingleOrDefault() != null && 
+                    r.FieldItems.Where(f => f.Tag == "POSTALLY_ADDRESSABLE").SingleOrDefault().Value == "Y"
+                )
+                .Select(r => r.ToAddress(ResultsScope))
+                .Where(r => Filter.Contains(r.Status)).ToList();
 
             #endregion
 
             #region Search AddressBase
 
-            IEnumerable<Address.Models.Address> AddressBase = new List<Address.Models.Address>();
+            IEnumerable <Address.Models.Address> AddressBase = new List<Address.Models.Address>();
 
             Search = await SPClient.SearchAsync("AddressBase", new QueryToken()
                 {
@@ -273,15 +295,19 @@ namespace GuildfordBoroughCouncil.Address.Api.Lookup
 
             ResultsScope = Scope;
 
-            AddressBase = Search.Results.Items.Select(r => r.ToAddress(ResultsScope))
+            // NOTE: SinglePoint AddressBase doesn't return postally addressable
+
+            AddressBase = Search.Results.Items
+                .Select(r => r.ToAddress(ResultsScope))
                 .Where(r => Filter.Contains(r.Status))
                 .WhereIf(ResultsScope == AddressSearchScope.LocalPlusSurrounding, r => LocalPlusSurrounding.Contains(r.AuthorityCode.Value))
                 .WhereIf(ResultsScope == AddressSearchScope.Local, r => r.AuthorityCode == Properties.Settings.Default.ThisAuthorityCode).ToList();
 
             #endregion
-
+            
             // Combine Llpg with AddressBase
-            return Llpg.Union(AddressBase, new AddressComparer()).WhereIf(!String.IsNullOrWhiteSpace(Category), a => a.Classification.StartsWith(Category));
+            return Llpg.Union(AddressBase, new AddressComparer())
+                .WhereIf(Category != null && Category.Count() > 0, a => Category.Any(b => a.Classification.StartsWith(b)));
         }
 
         /// <summary>
@@ -291,7 +317,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Lookup
         /// <param name="Lat"></param>
         /// <param name="Distance">Any positive value</param>
         /// <returns></returns>
-        public static async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> FindNearest(double Long, double Lat, double Distance, AddressSearchScope Scope = AddressSearchScope.Local, string Category = "Residential")
+        public static async Task<IEnumerable<Address.Models.Address>> FindNearest(double Long, double Lat, double Distance, AddressSearchScope Scope = AddressSearchScope.Local, string Category = "Residential")
         {
             var OS = new LatLng(Lat, Long).ToOSRef();
 

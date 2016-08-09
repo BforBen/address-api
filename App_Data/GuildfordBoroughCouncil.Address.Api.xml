@@ -254,6 +254,31 @@
             Initializes a new instance of the <see cref="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator"/> class.
             </summary>
         </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
         <member name="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
             <summary>
             Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
@@ -326,31 +351,6 @@
             <param name="type">The type.</param>
             <param name="mediaType">Type of the media.</param>
             <returns></returns>
-        </member>
-        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
-            <summary>
-            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
-            </summary>
-        </member>
-        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
-            <summary>
-            Gets the objects that are used directly as samples for certain actions.
-            </summary>
-        </member>
-        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
-            <summary>
-            Gets the objects that are serialized as samples by the supported formatters.
-            </summary>
-        </member>
-        <member name="P:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
-            <summary>
-            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
-            stopping when the factory successfully returns a non-<see langref="null"/> object.
-            </summary>
-            <remarks>
-            Collection includes just <see cref="M:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
-            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
-            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
         </member>
         <member name="T:GuildfordBoroughCouncil.Address.Api.Areas.HelpPage.HelpPageSampleKey">
             <summary>
@@ -495,22 +495,26 @@
             <param name="IncludeHistorical">Include historical records for the UPRN</param>
             <returns></returns>
         </member>
-        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.OnStreet(System.Int64,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean)">
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.OnStreet(System.Int64,System.Collections.Generic.IEnumerable{System.String},GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean,System.Boolean)">
             <summary>
             Lookup addresses by USRN.
             </summary>
             <param name="Usrn">The USRN to lookup</param>
+            <param name="Classifications">A list of classifications to filter by - defaults to Residential. Use "All" to include everything.</param>
             <param name="Scope">What is the scope for the search?</param>
             <param name="IncludeHistorical">Include historical records for the USRN</param>
+            <param name="PostallyAddressable">Is the property postally addressable?</param>
             <returns></returns>
         </member>
-        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.ByPostCode(System.String,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean)">
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.ByPostCode(System.String,System.Collections.Generic.IEnumerable{System.String},GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean,System.Boolean)">
             <summary>
             Lookup addresses by post code.
             </summary>
             <param name="Id">The post code to lookup</param>
+            <param name="Classifications">A list of classifications to filter by - defaults to Residential. Use "All" to include everything.</param>
             <param name="Scope">What is the scope for the search?</param>
             <param name="IncludeHistorical">Include historical records?</param>
+            <param name="PostallyAddressable">Is the property postally addressable?</param>
             <returns></returns>
         </member>
         <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.Nearest(GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Double,System.Double,System.Double)">
@@ -523,13 +527,15 @@
             <param name="Accuracy">Accuracy (in metres)</param>
             <returns></returns>
         </member>
-        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.BySomething(System.String,GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean)">
+        <member name="M:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV2Controller.BySomething(System.String,System.Collections.Generic.IEnumerable{System.String},GuildfordBoroughCouncil.Address.Models.AddressSearchScope,System.Boolean,System.Boolean)">
             <summary>
             Lookup addresses by something.
             </summary>
             <param name="Query">The query term (e.g. UPRN, USRN, post code, partial property address)</param>
+            <param name="Classifications">A list of classifications to filter by - defaults to Residential. Use "All" to include everything.</param>
             <param name="Scope">What is the scope for the search?</param>
             <param name="IncludeHistorical">Include historical records?</param>
+            <param name="PostallyAddressable">Is the property postally addressable?</param>
             <returns></returns>
         </member>
         <member name="T:GuildfordBoroughCouncil.Address.Api.Controllers.LookupV1Controller">
@@ -616,12 +622,6 @@
             <returns></returns>
         </member>
         <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultData">
-            <remarks/>
-        </member>
-        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceResult">
-            <remarks/>
-        </member>
-        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceResult.Error">
             <remarks/>
         </member>
         <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.SearchResultData.Results">
@@ -904,6 +904,12 @@
             <remarks/>
         </member>
         <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceError.Message">
+            <remarks/>
+        </member>
+        <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceResult">
+            <remarks/>
+        </member>
+        <member name="P:GuildfordBoroughCouncil.Address.Api.SinglePoint.ServiceResult.Error">
             <remarks/>
         </member>
         <member name="T:GuildfordBoroughCouncil.Address.Api.SinglePoint.FieldInfoCollection">

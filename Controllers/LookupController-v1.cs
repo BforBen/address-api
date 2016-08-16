@@ -23,22 +23,13 @@ namespace GuildfordBoroughCouncil.Address.Api.Controllers
         /// Lookup addresses by UPRN.
         /// </summary>
         /// <param name="Uprn">The UPRN to lookup</param>
-        /// <param name="CheckNational">If no results are found in the LLPG, should AddressBase be searched?</param>
-        /// <param name="IncludeHistorical">Include historical records for the UPRN</param>
         /// <returns></returns>
         [HttpGet]
         [Route("ByUprn/{Uprn:long}")]
-        public async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> ByUprn(Int64 Uprn, bool CheckNational = false, bool IncludeHistorical = true)
+        public async Task<IEnumerable<Address.Models.Address>> ByUprn(long Uprn)
         {
-            var Scope = AddressSearchScope.Local;
-
-            if (CheckNational)
-            {
-                Scope = AddressSearchScope.National;
-            }
-
             // Always include historical
-            return await Lookup.Data.ByUprn(Uprn, true, Scope);
+            return await Lookup.Data.ByUprn(Uprn, true, AddressSearchScope.National);
         }
 
         /// <summary>
@@ -50,7 +41,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("OnStreet/{Usrn:long}")]
-        public async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> OnStreet(Int64 Usrn, bool CheckNational = false, bool IncludeHistorical = true)
+        public async Task<IEnumerable<Address.Models.Address>> OnStreet(long Usrn, bool CheckNational = false, bool IncludeHistorical = true)
         {
             var Scope = AddressSearchScope.Local;
 
@@ -60,7 +51,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Controllers
             }
 
             // Always include historical
-            return await Lookup.Data.ByStreet(Usrn, true, Scope);
+            return await Lookup.Data.ByStreet(Usrn, true, Scope, new string[] { "Residential" });
         }
 
         /// <summary>
@@ -72,7 +63,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("ByPostCode")]
-        public async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> ByPostCode(string Id, bool CheckNational = false, bool IncludeHistorical = false)
+        public async Task<IEnumerable<Address.Models.Address>> ByPostCode(string Id, bool CheckNational = false, bool IncludeHistorical = false)
         {
             var Scope = AddressSearchScope.Local;
 
@@ -81,7 +72,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Controllers
                 Scope = AddressSearchScope.National;
             }
 
-            return await Lookup.Data.ByPostCode(Id, IncludeHistorical, Scope);
+            return await Lookup.Data.ByPostCode(Id, IncludeHistorical, Scope, new string[] { "Residential" });
         }
 
         /// <summary>
@@ -115,7 +106,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("BySomething")]
-        public async Task<IEnumerable<GuildfordBoroughCouncil.Address.Models.Address>> BySomething(string Query, bool CheckNational = false, bool IncludeHistorical = false)
+        public async Task<IEnumerable<Address.Models.Address>> BySomething(string Query, bool CheckNational = false, bool IncludeHistorical = false)
         {
             var Scope = AddressSearchScope.Local;
 
@@ -124,7 +115,7 @@ namespace GuildfordBoroughCouncil.Address.Api.Controllers
                 Scope = AddressSearchScope.National;
             }
 
-            return await Lookup.Data.BySomething(Query, IncludeHistorical, Scope);
+            return await Lookup.Data.BySomething(Query, IncludeHistorical, Scope, new string[] { "Residential" });
         }
     }
 }

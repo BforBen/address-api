@@ -172,7 +172,8 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-Web.Debug.config
-Web.Release.config
+
+
+App_Data/Logs.bookmark
+App_Data/Logs-*.json
 *.pubxml
-*.sln
